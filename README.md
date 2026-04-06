@@ -21,12 +21,12 @@ SpillIt is a full-stack anonymous messaging platform where users can receive hon
 
 ## 🌐 Live Demo
 
-👉 https://your-deployed-link.vercel.app
+👉 https://spillit-sigma.vercel.app
 
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/your-username/spillit.git
+git clone https://github.com/divyachaudharyy/Spillit.git
 cd spillit
 npm install
 npm run dev
