@@ -81,19 +81,19 @@ export default function SendMessage() {
       <div className="mx-auto w-full max-w-2xl space-y-8">
         {/* HEADER */}
         <div className="space-y-2">
-          <p className="text-sm font-medium text-gray-500">Anonymous message</p>
+          <p className="text-sm font-medium text-gray-600">Anonymous message</p>
 
           <h1 className="text-3xl font-semibold tracking-tight">
             Send a message to @{username}
           </h1>
 
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-gray-600">
             Your message will be sent anonymously.
           </p>
         </div>
 
         {/* MESSAGE INPUT */}
-        <div className="rounded-lg border border-gray-200 bg-white p-5">
+        <div className="rounded-lg border border-gray-300 bg-white p-5">
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
             <Controller
               name="content"
@@ -107,7 +107,7 @@ export default function SendMessage() {
                   <Textarea
                     {...field}
                     placeholder="Write your message..."
-                    className="mt-2 min-h-36 resize-none rounded-md border-gray-300 bg-white text-black placeholder:text-gray-400 focus-visible:ring-1 focus-visible:ring-black"
+                    className="mt-2 min-h-36 resize-none rounded-md border-gray-400 bg-white text-black placeholder:text-gray-600 focus-visible:ring-1 focus-visible:ring-black"
                   />
                 </Field>
               )}

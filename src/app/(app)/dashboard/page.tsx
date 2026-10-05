@@ -124,104 +124,133 @@ function UserDashboard() {
     });
   };
 
-  return (
-    <div className="min-h-screen bg-linear-to-br from-zinc-900 via-zinc-950 to-zinc-800 text-white px-4 py-8">
-      {/* MAIN CONTAINER */}
-      <div className="max-w-4xl mx-auto space-y-6">
-        {/*  HEADER */}
-        <div className="space-y-2 text-center md:text-left">
-          <h1 className="text-2xl md:text-3xl font-semibold bg-linear-to-r from-pink-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
-            Your Space
-          </h1>
-          <p className="text-gray-400 text-sm">
-            See what people are saying about you
+ return (
+  <div className="min-h-screen bg-white px-4 py-10 text-black">
+    <div className="mx-auto max-w-4xl space-y-8">
+
+      {/* HEADER */}
+      <div className="space-y-2">
+        <h1 className="text-3xl font-semibold tracking-tight">
+          Your messages
+        </h1>
+
+        <p className="text-sm text-gray-500">
+          Manage your anonymous messages and sharing link.
+        </p>
+      </div>
+
+      {/* LINK CARD */}
+      <div className="rounded-lg border border-gray-200 bg-white p-5">
+        <div className="mb-3">
+          <h2 className="text-sm font-medium text-black">
+            Your anonymous link
+          </h2>
+
+          <p className="mt-1 text-xs text-gray-500">
+            Share this link to receive anonymous messages.
           </p>
         </div>
 
-        {/*  LINK CARD */}
-        <div className="bg-white/5 border border-white/10 rounded-xl p-4 space-y-3">
-          <h2 className="text-xs text-gray-400">Your link</h2>
-
-          <div className="flex flex-col sm:flex-row gap-2">
-            <input
-              type="text"
-              value={profileUrl}
-              disabled
-              className="w-full p-2 rounded-lg bg-zinc-900 border border-white/10 text-sm text-gray-300"
-            />
-
-            <Button
-              onClick={copyToClipboard}
-              className="bg-linear-to-r from-pink-500 via-purple-500 to-blue-500 text-white"
-            >
-              Copy
-            </Button>
-          </div>
-        </div>
-
-        {/*  SETTINGS ROW */}
-        <div className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-4">
-          <span className="text-sm text-gray-300">Accept Messages</span>
-
-          <Switch
-            {...register("acceptMessages")}
-            checked={acceptMessages}
-            onCheckedChange={handleSwitchChange}
-            disabled={isSwitchLoading}
-            className="
-    data-[state=checked]:bg-linear-to-r 
-    data-[state=checked]:from-pink-500 
-    data-[state=checked]:to-purple-500
-
-    data-[state=unchecked]:bg-zinc-700
-
-    relative transition-all duration-300
-  "
+        <div className="flex flex-col gap-2 sm:flex-row">
+          <input
+            type="text"
+            value={profileUrl}
+            disabled
+            className="h-11 w-full rounded-md border border-gray-300 bg-gray-50 px-3 text-sm text-gray-600 outline-none"
           />
-        </div>
 
-        {/*  REFRESH */}
-        <div className="flex justify-end">
           <Button
-            className="bg-white/5 border border-white/10 hover:bg-white/10"
-            onClick={(e) => {
-              e.preventDefault();
-              fetchMessages(true);
-            }}
+            type="button"
+            onClick={copyToClipboard}
+            className="h-11 rounded-md bg-black px-6 text-white hover:bg-gray-800"
           >
-            {isLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <div className="flex items-center gap-2">
-                <RefreshCcw className="h-4 w-4" />
-                Refresh
-              </div>
-            )}
+            Copy link
           </Button>
         </div>
+      </div>
 
-        {/*  MESSAGES */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {messages.length > 0 ? (
-            messages.map((message) => (
-              <MessageCard
-                key={message._id}
-                message={message}
-                onMessageDelete={handleDeleteMessage}
-              />
-            ))
+      {/* SETTINGS */}
+      <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-5">
+        <div>
+          <h2 className="text-sm font-medium text-black">
+            Accept messages
+          </h2>
+
+          <p className="mt-1 text-xs text-gray-500">
+            Allow people to send you anonymous messages.
+          </p>
+        </div>
+
+        <Switch
+          {...register("acceptMessages")}
+          checked={acceptMessages}
+          onCheckedChange={handleSwitchChange}
+          disabled={isSwitchLoading}
+          className="
+            data-[state=checked]:bg-black
+            data-[state=unchecked]:bg-gray-300
+          "
+        />
+      </div>
+
+      {/* MESSAGES HEADER */}
+      <div className="flex items-center justify-between border-b border-gray-200 pb-4">
+        <div>
+          <h2 className="text-lg font-semibold">
+            Messages
+          </h2>
+
+          <p className="mt-1 text-xs text-gray-500">
+            Anonymous messages you've received.
+          </p>
+        </div>
+
+        <Button
+          type="button"
+          variant="outline"
+          className="h-9 rounded-md border-gray-300 bg-white text-black hover:bg-gray-100"
+          onClick={(e) => {
+            e.preventDefault();
+            fetchMessages(true);
+          }}
+        >
+          {isLoading ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
           ) : (
-            <div className="col-span-full text-center text-gray-400 py-10">
-              <p>No messages yet 👀</p>
-              <p className="text-sm mt-1">
-                Share your link and start receiving messages
-              </p>
+            <div className="flex items-center gap-2">
+              <RefreshCcw className="h-4 w-4" />
+              Refresh
             </div>
           )}
-        </div>
+        </Button>
       </div>
+
+      {/* MESSAGES */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {messages.length > 0 ? (
+          messages.map((message) => (
+            <MessageCard
+              key={message._id}
+              message={message}
+              onMessageDelete={handleDeleteMessage}
+            />
+          ))
+        ) : (
+          <div className="col-span-full rounded-lg border border-dashed border-gray-300 py-16 text-center">
+            <p className="text-sm font-medium text-gray-700">
+              No messages yet
+            </p>
+
+            <p className="mt-1 text-sm text-gray-500">
+              Share your anonymous link to start receiving messages.
+            </p>
+          </div>
+        )}
+      </div>
+
     </div>
-  );
+  </div>
+);
 }
 
 export default UserDashboard;
