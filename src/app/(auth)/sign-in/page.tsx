@@ -49,83 +49,81 @@ function SignInForm() {
     }
   };
 
-  return (
-    <div className="relative flex items-center justify-center min-h-screen bg-black text-white overflow-hidden">
-      {/* Background Glow */}
-      <div className="absolute w-125 h-125 bg-purple-600 rounded-full blur-[150px] opacity-30 -top-25 -left-25" />
-      <div className="absolute w-100 h-100 bg-blue-600 rounded-full blur-[120px] opacity-30 -bottom-25 -right-25" />
+ return (
+  <div className="min-h-screen bg-white text-black flex items-center justify-center px-4">
+    <div className="w-full max-w-md">
 
-      {/* Floating Messages */}
-      <div className="absolute top-20 left-10 bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl text-sm">
-        &quot;Missed you here &quot;
+      <div className="mb-8">
+        <h1 className="text-3xl font-semibold tracking-tight">
+          Sign in
+        </h1>
+
+        <p className="mt-2 text-sm text-gray-500">
+          Sign in to manage your anonymous messages.
+        </p>
       </div>
-      <div className="absolute bottom-24 right-10 bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl text-sm">
-        &#34;Login... someone’s waiting 💬&#34;
-      </div>
 
-      {/*  Glass Card */}
-      <div className="w-full max-w-md p-8 space-y-6 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-xl">
-        {/*  Heading */}
-        <div className="text-center">
-          <h1 className="text-3xl md:text-4xl font-bold bg-linear-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-            Welcome Back
-          </h1>
-          <p className="mt-2 text-gray-300 text-sm">
-            Someone might have left you a message...
-          </p>
-        </div>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-5"
+      >
 
-        {/*  Form */}
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-          <Controller
-            name="identifier"
-            control={form.control}
-            render={({ field }) => (
-              <Field>
-                <Label className="text-gray-300">Email / Username</Label>
-                <Input
-                  {...field}
-                  className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:ring-2 focus:ring-purple-500"
-                  placeholder="Enter your username or email"
-                />
-              </Field>
-            )}
-          />
+        <Controller
+          name="identifier"
+          control={form.control}
+          render={({ field }) => (
+            <Field>
+              <Label className="text-sm font-medium text-black">
+                Email or username
+              </Label>
 
-          <Controller
-            name="password"
-            control={form.control}
-            render={({ field }) => (
-              <Field>
-                <Label className="text-gray-300">Password</Label>
-                <Input
-                  type="password"
-                  {...field}
-                  className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:ring-2 focus:ring-purple-500"
-                  placeholder="Enter your password"
-                />
-              </Field>
-            )}
-          />
+              <Input
+                {...field}
+                className="mt-2 h-11 rounded-md border-gray-300 bg-white text-black placeholder:text-gray-400 focus-visible:ring-1 focus-visible:ring-black"
+                placeholder="Enter your email or username"
+              />
+            </Field>
+          )}
+        />
 
-          {/*  CTA Button */}
-          <Button
-            className="w-full bg-linear-to-r from-purple-500 to-blue-500 text-white hover:scale-105 transition duration-200"
-            type="submit"
-          >
-            Enter 👀
-          </Button>
-        </form>
+        <Controller
+          name="password"
+          control={form.control}
+          render={({ field }) => (
+            <Field>
+              <Label className="text-sm font-medium text-black">
+                Password
+              </Label>
 
-        {/* Footer */}
-        <div className="text-center text-sm text-gray-400">
-          Not a member yet?{" "}
-          <Link href="/sign-up" className="text-purple-400 hover:underline">
-            Join the fun
-          </Link>
-        </div>
-      </div>
+              <Input
+                type="password"
+                {...field}
+                className="mt-2 h-11 rounded-md border-gray-300 bg-white text-black placeholder:text-gray-400 focus-visible:ring-1 focus-visible:ring-black"
+                placeholder="Enter your password"
+              />
+            </Field>
+          )}
+        />
+
+        <Button
+          className="w-full h-11 rounded-md bg-black text-white hover:bg-gray-800"
+          type="submit"
+        >
+          Sign in
+        </Button>
+      </form>
+
+      <p className="mt-6 text-center text-sm text-gray-500">
+        Don&apos;t have an account?{" "}
+        <Link
+          href="/sign-up"
+          className="font-medium text-black hover:underline"
+        >
+          Create an account
+        </Link>
+      </p>
     </div>
-  );
+  </div>
+);
 }
 export default SignInForm;
